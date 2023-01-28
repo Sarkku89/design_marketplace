@@ -1,35 +1,45 @@
 const bcrypt = require('bcrypt');
 const userRouter = require('express').Router();
 const User = require('../models/user');
-const { response } = require('../server');
 
 // Get all users
 userRouter.get('/', async (req, res) => {
   const users = await User.find({});
-  response.json(users);
+  res.json(users);
 });
 
 // Create new user
 userRouter.post('/', async (req, res) => {
-  const { username, password } = request.body;
+  const { username, password, email } = request.body;
 
   if (password === undefined) {
     return (
-      response.status(400),
+      res.status(400),
       json({
         error: 'password is required',
       })
     );
   } else if (username === undefined) {
-    return response.status(400).json({
+    return res.status(400).json({
       error: 'username is required',
+    });
+  } else if (email === undefined) {
+    return res.status(400).json({
+      error: 'email is required',
     });
   }
 
-  const existingUser = await User.findOne({ username });
-  if (existingUser) {
-    return response.status(400).json({
+  const existingUserName = await User.findOne({ username });
+  if (existingUserName) {
+    return res.status(400).json({
       error: 'username must be unique',
+    });
+  }
+
+  const existingEmail = await User.find({ email });
+  if (existingEmail) {
+    return res.status(400).json({
+      error: 'email must be unique',
     });
   }
 
@@ -37,10 +47,10 @@ userRouter.post('/', async (req, res) => {
   const saltRounds = 10;
   const passwordhash = await bcrypt.hash(password, saltRounds);
 
-  const user = new User({ username, passwordhash });
+  const user = new User({ username, passwordhash, email });
 
   const savedUser = await user.save();
-  response.status(201).json(savedUser);
+  res.status(201).json(savedUser);
 });
 
 module.exports = userRouter;

@@ -1,19 +1,41 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Container } from 'react-bootstrap';
 import Login from './components/Login';
 import Home from './components/Home';
 import Register from './components/Register';
 import NavigationMenu from './components/NavigationMenu';
+import AlertMessage from './components/AlertMessage';
 import { Routes, Route } from 'react-router-dom';
+import { useState } from 'react';
 
 const App = () => {
+  const [alertState, setAlertState] = useState({
+    show: false,
+    variant: '',
+    message: '',
+    header: '',
+  });
+
+  // You can use showMessage function to show a feedback message to
+  // the user. Argument "variant" should get the value 'success' for
+  // stuff like successfull login and 'danger' for error messages and such.
+  const showMessage = (message, header, variant) => {
+    setAlertState({ show: true, message: message, header: header, variant: variant });
+    setTimeout(() => {
+      setAlertState({ ...alertState, show: false });
+    }, 3500);
+  };
+
   return (
-    <>
+    <Container>
       <NavigationMenu />
+      {alertState.show ? <AlertMessage alertState={alertState} /> : null}
       <Routes>
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register showMessage={showMessage} />} />
+        <Route path="/login" element={<Login showMessage={showMessage} />} />
         <Route path="/" element={<Home />} />
       </Routes>
-    </>
+    </Container>
   );
 };
 
