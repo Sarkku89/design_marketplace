@@ -9,6 +9,8 @@ import { Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
 
 const App = () => {
+  const [loggedUser, setLoggedUser] = useState(null);
+
   const [alertState, setAlertState] = useState({
     show: false,
     variant: '',
@@ -23,16 +25,23 @@ const App = () => {
     setAlertState({ show: true, message: message, header: header, variant: variant });
     setTimeout(() => {
       setAlertState({ ...alertState, show: false });
-    }, 3500);
+    }, 4000);
   };
 
   return (
     <Container>
-      <NavigationMenu />
+      <NavigationMenu
+        loggedUser={loggedUser}
+        setLoggedUser={setLoggedUser}
+        showMessage={showMessage}
+      />
       {alertState.show ? <AlertMessage alertState={alertState} /> : null}
       <Routes>
         <Route path="/register" element={<Register showMessage={showMessage} />} />
-        <Route path="/login" element={<Login showMessage={showMessage} />} />
+        <Route
+          path="/login"
+          element={<Login showMessage={showMessage} setLoggedUser={setLoggedUser} />}
+        />
         <Route path="/" element={<Home />} />
       </Routes>
     </Container>

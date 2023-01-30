@@ -10,15 +10,12 @@ userRouter.get('/', async (req, res) => {
 
 // Create new user
 userRouter.post('/', async (req, res) => {
-  const { username, password, email } = request.body;
+  const { username, password, email } = req.body;
 
   if (password === undefined) {
-    return (
-      res.status(400),
-      json({
-        error: 'password is required',
-      })
-    );
+    return res.status(400).json({
+      error: 'password is required',
+    });
   } else if (username === undefined) {
     return res.status(400).json({
       error: 'username is required',
@@ -36,7 +33,7 @@ userRouter.post('/', async (req, res) => {
     });
   }
 
-  const existingEmail = await User.find({ email });
+  const existingEmail = await User.findOne({ email });
   if (existingEmail) {
     return res.status(400).json({
       error: 'email must be unique',

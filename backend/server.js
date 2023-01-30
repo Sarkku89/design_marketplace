@@ -1,14 +1,14 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
-const http = require('http');
 const express = require('express');
+const logger = require('morgan');
+const http = require('http');
 const cors = require('cors');
 const userRouter = require('./controllers/userController');
 const loginRouter = require('./controllers/loginController');
 
 const app = express();
 
-mongoose.set('strictQuery', true);
 mongoose.connect(process.env.MONGOURI);
 const db = mongoose.connection;
 
@@ -20,6 +20,7 @@ app.set('port', process.env.PORT || 3001);
 
 // Middlewares
 app.use(cors());
+app.use(logger('dev'));
 app.use(express.json());
 
 // Routers
