@@ -1,6 +1,7 @@
 const itemRouter = require('express').Router();
 const { response } = require('express');
 const Item = require('../models/item');
+const jwt = require('jsonwebtoken');
 
 // Middleware for extracting user information of a request
 const userExtractor = async (req, res, next) => {

@@ -1,0 +1,7 @@
+POST http://localhost:3001/api/items
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkVya2tpRXNpbWVya2tpIiwiZW1haWwiOiJlcmtraS5lc2ltZXJra2lAZ21haWwuY29tIiwiaWQiOiI2M2Q2Yzc2MWQ1NjNjZmFkN2FiYzlkNDQiLCJpYXQiOjE2NzUwNTY4NzN9.5FR5RUn1pfr861SGxbwUP0L_JYFmWj89tHZESONx3SA
+
+{
+  "name": "testitem", "description": "testcription", "category": "testcategory", "price": 40
+}

@@ -6,6 +6,7 @@ const http = require('http');
 const cors = require('cors');
 const userRouter = require('./controllers/userController');
 const loginRouter = require('./controllers/loginController');
+const itemRouter = require('./controllers/itemController');
 
 const app = express();
 
@@ -26,6 +27,7 @@ app.use(express.json());
 // Routers
 app.use('/api/users', userRouter);
 app.use('/api/login', loginRouter);
+app.use('/api/items', itemRouter);
 
 const server = http.createServer(app);
 
