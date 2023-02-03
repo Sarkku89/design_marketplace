@@ -1,0 +1,23 @@
+.color-nav {
+    background-color: rgb(127, 238, 255);
+    color:black
+}
+
+.container {
+    flex:1;
+    flex-direction: column;
+}
+
+.black-header-nav {
+    color: black;
+    font-size: 250%;
+}
+
+.nav-link {
+    background-color: rgb(113, 210, 255);
+    width:10em;
+    margin: 2%;
+    text-align: center;
+    color: aliceblue;
+    font-size: 110%;
+}

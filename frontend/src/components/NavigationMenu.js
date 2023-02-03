@@ -2,6 +2,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 //import { useNavigate } from 'react-router-dom';
 import { Container, Navbar, Nav } from 'react-bootstrap';
 import itemService from '../services/item';
+import '../style.css';
 
 const NavigationMenu = ({ loggedUser, setLoggedUser, showMessage }) => {
   //const navigate = useNavigate();
@@ -15,20 +16,20 @@ const NavigationMenu = ({ loggedUser, setLoggedUser, showMessage }) => {
   };
 
   return (
-    <Navbar bg="info" variant="dark" >
-      <Container>
+    <Navbar >
+      <Container className='container'>
         <LinkContainer to={'/'}>
-          <Navbar.Brand >Design Marketplace</Navbar.Brand>
+          <Navbar.Brand className='black-header-nav' >DESIGN MARKETPLACE</Navbar.Brand>
         </LinkContainer>
         <Navbar.Toggle aria-controls="navbar" />
         <Navbar.Collapse id="navbar">
           {!loggedUser ? (
             <Nav>
-              <LinkContainer to={'/login'}>
-                <Nav.Link >Login</Nav.Link>
+              <LinkContainer  to={'/login'}>
+                <Nav.Link className='nav-link' >Login</Nav.Link>
               </LinkContainer>
               <LinkContainer to={'/register'}>
-                <Nav.Link>Register</Nav.Link>
+                <Nav.Link className='nav-link'>Register</Nav.Link>
               </LinkContainer>
             </Nav>
           ) : (
@@ -45,3 +46,5 @@ const NavigationMenu = ({ loggedUser, setLoggedUser, showMessage }) => {
 };
 
 export default NavigationMenu;
+
+
