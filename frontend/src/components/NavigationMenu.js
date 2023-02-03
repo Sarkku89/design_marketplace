@@ -15,17 +15,17 @@ const NavigationMenu = ({ loggedUser, setLoggedUser, showMessage }) => {
   };
 
   return (
-    <Navbar bg="info" variant="dark">
+    <Navbar bg="info" variant="dark" >
       <Container>
         <LinkContainer to={'/'}>
-          <Navbar.Brand>Design Marketplace</Navbar.Brand>
+          <Navbar.Brand >Design Marketplace</Navbar.Brand>
         </LinkContainer>
         <Navbar.Toggle aria-controls="navbar" />
         <Navbar.Collapse id="navbar">
           {!loggedUser ? (
             <Nav>
               <LinkContainer to={'/login'}>
-                <Nav.Link>Login</Nav.Link>
+                <Nav.Link >Login</Nav.Link>
               </LinkContainer>
               <LinkContainer to={'/register'}>
                 <Nav.Link>Register</Nav.Link>
