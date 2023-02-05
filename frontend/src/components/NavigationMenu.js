@@ -15,32 +15,47 @@ const NavigationMenu = ({ loggedUser, setLoggedUser, showMessage }) => {
   };
 
   return (
-    <Navbar bg="info" variant="dark">
-      <Container>
-        <LinkContainer to={'/'}>
-          <Navbar.Brand>Design Marketplace</Navbar.Brand>
-        </LinkContainer>
-        <Navbar.Toggle aria-controls="navbar" />
-        <Navbar.Collapse id="navbar">
-          {!loggedUser ? (
-            <Nav>
-              <LinkContainer to={'/login'}>
-                <Nav.Link>Login</Nav.Link>
-              </LinkContainer>
-              <LinkContainer to={'/register'}>
-                <Nav.Link>Register</Nav.Link>
-              </LinkContainer>
-            </Nav>
-          ) : (
-            <Nav>
-              <LinkContainer to={'/'}>
-                <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
-              </LinkContainer>
-            </Nav>
-          )}
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+    <div>
+      <h2 style={{fontWeight: 'bold', textAlign: 'center', padding: '20px'}}>DESIGN MARKETPLACE</h2>
+      <Navbar bg="info" variant="dark" expand="lg">
+        <Container>
+          <Navbar.Toggle aria-controls="navbar" />
+          <Navbar.Collapse id="navbar">
+            {!loggedUser ? (
+              <Nav>
+                <LinkContainer to={'/'}>
+                  <Nav.Link>Home</Nav.Link>
+                </LinkContainer>
+                <LinkContainer to={'/'}>
+                  <Nav.Link>Products</Nav.Link>
+                </LinkContainer>
+                <LinkContainer to={'/contact'}>
+                  <Nav.Link>Contact</Nav.Link>
+                </LinkContainer>
+              </Nav>
+            ) : (
+              <Nav>
+                <LinkContainer to={'/'}>
+                  <Nav.Link>Home</Nav.Link>
+                </LinkContainer>
+                <LinkContainer to={'/'}>
+                  <Nav.Link>Products</Nav.Link>
+                </LinkContainer>
+                <LinkContainer to={'/contact'}>
+                  <Nav.Link>Contact</Nav.Link>
+                </LinkContainer>
+                <LinkContainer to={'/profile'}>
+                  <Nav.Link>Profile</Nav.Link>
+                </LinkContainer>
+                <LinkContainer to={'/'}>
+                  <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+                </LinkContainer>
+              </Nav>
+            )}
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+    </div>
   );
 };
 

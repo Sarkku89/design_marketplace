@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import loginService from '../services/login';
 import itemService from '../services/item';
 
-const Login = ({ showMessage, setLoggedUser }) => {
+const Login = ( { showMessage, setLoggedUser } ) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -30,8 +30,8 @@ const Login = ({ showMessage, setLoggedUser }) => {
   };
 
   return (
-    <Container>
-      <h2>Login</h2>
+    <Container style={{backgroundColor: 'rgba(89, 189, 245, 0.19)', borderRadius: '10px', padding: '25px'}}>
+      <p style={{fontSize: '17px', fontWeight: 'bold'}}>Already a user? <br />Login here!</p>
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="loginUsername">
           <Form.Label>Username</Form.Label>
@@ -52,7 +52,7 @@ const Login = ({ showMessage, setLoggedUser }) => {
             placeholder="Enter password"
           />
         </Form.Group>
-        <Button type="submit">Submit</Button>
+        <Button type="submit">Login</Button>
       </Form>
     </Container>
   );

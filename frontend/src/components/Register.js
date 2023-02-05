@@ -24,8 +24,8 @@ const Register = ({ showMessage }) => {
   };
 
   return (
-    <Container>
-      <h2>Register</h2>
+    <Container style={{backgroundColor: 'rgba(89, 189, 245, 0.19)', borderRadius: '10px', padding: '25px'}}>
+      <p style={{fontSize: '17px', fontWeight: 'bold'}}>Not a user? <br />Sign up here!</p>
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="registerUsername">
           <Form.Label>Username</Form.Label>
@@ -57,7 +57,7 @@ const Register = ({ showMessage }) => {
           />
         </Form.Group>
 
-        <Button type="submit">Submit</Button>
+        <Button type="submit">Sign up</Button>
       </Form>
     </Container>
   );
