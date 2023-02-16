@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Form, Stack } from 'react-bootstrap';
-
-
+import itemService from '../services/item';
 
 const AddItem = () => {
     const [name, setName] = useState('');
@@ -11,6 +10,18 @@ const AddItem = () => {
     const [imgurl, setImgUrl] = useState('');
     const [seller, setSeller] = useState({});
 
+const onSubmit = async () => {
+    await itemService.create(
+        {
+            name,
+            description,
+            category,
+            price,
+            imgurl,
+            seller: '63d6c6e2d563cfad7abc9d40'
+        }
+    )
+}  
     useEffect(() => {
         getUser();
         console.log(seller.username);
@@ -81,7 +92,7 @@ const AddItem = () => {
                     />
                 </Form.Group>
 
-                <Button style={{ float: 'right' }} type='submit'>Save</Button>
+                <Button style={{ float: 'right' }} type='submit' onSubmit={onSubmit()}>Save</Button>
 
             </Form>
 
