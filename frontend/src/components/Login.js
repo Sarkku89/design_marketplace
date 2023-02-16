@@ -16,7 +16,7 @@ const Login = ( { showMessage, setLoggedUser } ) => {
       const user = await loginService.login({ username, password });
 
       window.localStorage.setItem('loggedMarketplaceUser', JSON.stringify(user));
-
+      console.log(user.token);
       itemService.setToken(user.token);
       setLoggedUser(user);
       setUsername('');

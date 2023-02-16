@@ -17,6 +17,7 @@ const getAll = async () => {
 
 // Create new item (== list new item for sale)
 const create = async (itemObject) => {
+  console.log("Haloo",token);
   const config = {
     headers: { Authorization: token },
   };
