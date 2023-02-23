@@ -1,14 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Form, Stack } from 'react-bootstrap';
+import itemService from '../services/item';
+import Card from 'react-bootstrap/Card';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 
 
 
 const Products = () => {
     const [category, setCategory] = useState('0');
     const [items, setItems] = useState([]);
-    const handleClick = () => {
+    const [loading, setLoading] = useState(false); 
 
-        
+    const handleClick = () => {
+        let allAsPromise = itemService.getAll();
+        allAsPromise.then(function(result){
+            console.log(result)
+            setItems(result)
+            console.log(items.length)
+            console.log(items)
+            setLoading(true)
+        })
     };
 
     return (
@@ -35,6 +47,24 @@ const Products = () => {
 
 
             </Form>
+            <Row xs={1} md={2} className="g-4">
+      {loading ? Array.from({ length: items.length }).map((_, i) => (
+        <Col>
+          <Card>
+            <Card.Img variant="top" src="imgs.js/100px160" />
+            <Card.Body>
+              <Card.Title>{items[i].name}</Card.Title>
+              <Card.Text>
+                Description: {items[i].description} {'\n'}
+                Price: {items[i].price}
+                {'\n'}
+              </Card.Text>
+
+            </Card.Body>
+          </Card>
+        </Col>
+      )) : <p>Loading</p>}
+    </Row>
 
         </Stack>
     )

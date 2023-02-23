@@ -2,7 +2,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 //import { useNavigate } from 'react-router-dom';
 import { Container, Navbar, Nav } from 'react-bootstrap';
 import itemService from '../services/item';
-import '../style.css';
+
 
 const NavigationMenu = ({ loggedUser, setLoggedUser, showMessage }) => {
   //const navigate = useNavigate();
