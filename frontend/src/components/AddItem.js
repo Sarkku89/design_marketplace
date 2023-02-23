@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Form, Stack } from 'react-bootstrap';
 import itemService from '../services/item';
+import FileBase64 from 'react-file-base64';
 
 const AddItem = () => {
     const [name, setName] = useState('');

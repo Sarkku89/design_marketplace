@@ -13,15 +13,16 @@ const Products = () => {
     const [loading, setLoading] = useState(false); 
 
     const handleClick = () => {
+        setLoading(true) 
+    };
+
+    useEffect(() => {
         let allAsPromise = itemService.getAll();
         allAsPromise.then(function(result){
             console.log(result)
             setItems(result)
-            console.log(items.length)
-            console.log(items)
-            setLoading(true)
         })
-    };
+    }, [])
 
     return (
         <Stack style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '30px' }}>
@@ -49,7 +50,7 @@ const Products = () => {
             </Form>
             <Row xs={1} md={2} className="g-4">
       {loading ? Array.from({ length: items.length }).map((_, i) => (
-        <Col>
+        <Col key={items[i].price}>
           <Card>
             <Card.Img variant="top" src="imgs.js/100px160" />
             <Card.Body>
@@ -63,7 +64,7 @@ const Products = () => {
             </Card.Body>
           </Card>
         </Col>
-      )) : <p>Loading</p>}
+      )) : <p></p>}
     </Row>
 
         </Stack>
