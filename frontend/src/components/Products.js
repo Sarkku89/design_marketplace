@@ -22,11 +22,11 @@ const Products = () => {
 
                         onChange={({ target }) => setCategory(target.value)}>
                         <option>Choose a category</option>
-                        <option value="1">Furniture</option>
-                        <option value="2">Decoration</option>
-                        <option value="3">Carpets</option>
-                        <option value="4">Other textile</option>
-                        <option value="5">Other</option>
+                        <option value="Furniture">Furniture</option>
+                        <option value="Decoration">Decoration</option>
+                        <option value="Carpets">Carpets</option>
+                        <option value="OtherTextile">Other textile</option>
+                        <option value="Other">Other</option>
                     </Form.Select>
                     <Button style={{ float: 'center' }} type="button" onClick={handleClick}>Browse</Button>
                 </Form.Group>

@@ -5,8 +5,8 @@ let token = null;
 
 // Set a user token upon login, remove upon logout
 // the token will be used to link items into users
-const setToken = (token) => {
-  token = `bearer ${token}`;
+const setToken = (newToken) => {
+  token = `bearer ${newToken}`;
 };
 
 // Get all items
@@ -17,7 +17,7 @@ const getAll = async () => {
 
 // Create new item (== list new item for sale)
 const create = async (itemObject) => {
-  console.log("Haloo",token);
+  //console.log("Haloo",token);
   const config = {
     headers: { Authorization: token },
   };

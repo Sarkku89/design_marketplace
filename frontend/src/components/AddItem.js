@@ -17,7 +17,7 @@ const onSubmit = async () => {
             category,
             price,
             imgurl,
-            seller: '63d6c6e2d563cfad7abc9d40'
+            //seller: '63d6c6e2d563cfad7abc9d40'
         }
     )
 }  ;
@@ -55,17 +55,15 @@ const onSubmit = async () => {
                     />
                 </Form.Group>
                 <Form.Group className='mb-3' controlId='category'>
-
-
                     <Form.Select
                         onChange={({ target }) => setCategory(target.value)}
                         aria-label="Choose a category">
                         <option>Category</option>
-                        <option value="1">Furniture</option>
-                        <option value="2">Decoration</option>
-                        <option value="3">Carpets</option>
-                        <option value="4">Other textile</option>
-                        <option value="5">Other</option>
+                        <option value="Furniture">Furniture</option>
+                        <option value="Decoration">Decoration</option>
+                        <option value="Carpets">Carpets</option>
+                        <option value="OtherTextile">Other textile</option>
+                        <option value="Other">Other</option>
                     </Form.Select>
                 </Form.Group>
                 <Form.Group className='mb-3' controlId='price'>
