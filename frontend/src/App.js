@@ -5,6 +5,10 @@ import Home from './components/Home';
 import Register from './components/Register';
 import NavigationMenu from './components/NavigationMenu';
 import AlertMessage from './components/AlertMessage';
+import Contact from './components/Contact';
+import Products from './components/Products';
+import Profile from './components/Profile';
+import AddItem from './components/AddItem';
 import { Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
 
@@ -40,9 +44,13 @@ const App = () => {
         <Route path="/register" element={<Register showMessage={showMessage} />} />
         <Route
           path="/login"
-          element={<Login showMessage={showMessage} setLoggedUser={setLoggedUser} />}
+          element={<Login />}
         />
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home loggedUser={loggedUser} showMessage={showMessage} setLoggedUser={setLoggedUser}/>} />
+        <Route path="/additem" element={<AddItem />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/products" element={<Products />} />
       </Routes>
     </Container>
   );

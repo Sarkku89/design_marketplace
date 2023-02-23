@@ -13,6 +13,8 @@ itemRouter.get("/", async (req, res) => {
   res.json(items);
 });
 
+
+
 // Add new item on sale
 itemRouter.post("/", userExtractor, async (req, res) => {
   const body = req.body;
@@ -23,10 +25,11 @@ itemRouter.post("/", userExtractor, async (req, res) => {
     description: body.description,
     category: body.category,
     price: body.price,
+    imgurl: body.imgurl,
     seller: user._id,
   });
 
-  if (body.name && body.description && body.category && body.price) {
+  if (body.name && body.description && body.category && body.price && body.imgurl) {
     const savedItem = await item.save();
     user.items = user.items.concat(savedItem._id);
     await user.save();
