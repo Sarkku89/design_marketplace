@@ -16,34 +16,6 @@ const NavigationMenu = ({ loggedUser, setLoggedUser, showMessage }) => {
   };
 
   return (
-<<<<<<< HEAD
-    <Navbar >
-      <Container className='container'>
-        <LinkContainer to={'/'}>
-          <Navbar.Brand className='black-header-nav' >DESIGN MARKETPLACE</Navbar.Brand>
-        </LinkContainer>
-        <Navbar.Toggle aria-controls="navbar" />
-        <Navbar.Collapse id="navbar">
-          {!loggedUser ? (
-            <Nav>
-              <LinkContainer  to={'/login'}>
-                <Nav.Link className='nav-link' >Login</Nav.Link>
-              </LinkContainer>
-              <LinkContainer to={'/register'}>
-                <Nav.Link className='nav-link'>Register</Nav.Link>
-              </LinkContainer>
-            </Nav>
-          ) : (
-            <Nav>
-              <LinkContainer to={'/'}>
-                <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
-              </LinkContainer>
-            </Nav>
-          )}
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
-=======
     <div>
       <h2 style={{fontWeight: 'bold', textAlign: 'center', padding: '20px'}}>DESIGN MARKETPLACE</h2>
       <Navbar bg="info" variant="dark" expand="lg">
@@ -89,7 +61,6 @@ const NavigationMenu = ({ loggedUser, setLoggedUser, showMessage }) => {
         </Container>
       </Navbar>
     </div>
->>>>>>> Sariannan_branch
   );
 };
 

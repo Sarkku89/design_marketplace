@@ -9,7 +9,7 @@ const Home = ({ loggedUser, showMessage, setLoggedUser }) => {
         <p style={{fontSize: '17px'}}>Here you can sell and buy furniture and design items.</p>
       {!loggedUser ? (
       <Row style={{padding: '10px'}}>
-        <Col style={{padding: '20px'}}><Register /></Col>
+        <Col style={{padding: '20px'}}><Register showMessage={showMessage}  /></Col>
         <Col style={{padding: '20px'}}><Login showMessage={showMessage} setLoggedUser={setLoggedUser}/></Col>
       </Row>
       ) : (
