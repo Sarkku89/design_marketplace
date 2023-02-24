@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Stack } from 'react-bootstrap';
-import userService from '../services/user';
+import { Stack, Container } from 'react-bootstrap';
 
 const Profile = () => {
   const [user, setUser] = useState({})
   
   useEffect(() => {
     getUser();
-    console.log(user.username);   
   }, [])
   
   const getUser = async () => {
@@ -26,6 +24,11 @@ const Profile = () => {
       <br />
       <p style={{textAlign: 'center'}}>Email:<br />{user.email}</p>
       <h3 style={{fontWeight: 'bold'}}>Items on sale</h3>
+      <Container>
+        <Stack>
+          <div> items </div>
+        </Stack>
+      </Container>
     </Stack>
   )
 }

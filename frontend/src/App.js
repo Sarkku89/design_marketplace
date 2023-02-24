@@ -9,6 +9,7 @@ import Contact from './components/Contact';
 import Profile from './components/Profile';
 import { Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
+import './App.css';
 
 const App = () => {
   const [loggedUser, setLoggedUser] = useState(null);

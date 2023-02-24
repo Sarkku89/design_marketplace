@@ -16,9 +16,9 @@ const NavigationMenu = ({ loggedUser, setLoggedUser, showMessage }) => {
 
   return (
     <div>
-      <h2 style={{fontWeight: 'bold', textAlign: 'center', padding: '20px'}}>DESIGN MARKETPLACE</h2>
-      <Navbar bg="info" variant="dark" expand="lg">
+      <Navbar bg="primary" variant="dark" expand="lg">       
         <Container>
+          <Navbar.Brand href="/">Design Marketplace</Navbar.Brand>
           <Navbar.Toggle aria-controls="navbar" />
           <Navbar.Collapse id="navbar">
             {!loggedUser ? (
