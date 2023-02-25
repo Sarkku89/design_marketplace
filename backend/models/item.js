@@ -19,6 +19,11 @@ const itemSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  imgurl: {
+    type: String,
+    minlength: 10,
+    required: true,
+  },
   seller: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',

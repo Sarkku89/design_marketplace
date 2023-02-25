@@ -3,6 +3,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { Container, Navbar, Nav } from 'react-bootstrap';
 import itemService from '../services/item';
 
+
 const NavigationMenu = ({ loggedUser, setLoggedUser, showMessage }) => {
   //const navigate = useNavigate();
 
@@ -29,6 +30,7 @@ const NavigationMenu = ({ loggedUser, setLoggedUser, showMessage }) => {
                 <LinkContainer to={'/'}>
                   <Nav.Link>Products</Nav.Link>
                 </LinkContainer>
+                
                 <LinkContainer to={'/contact'}>
                   <Nav.Link>Contact</Nav.Link>
                 </LinkContainer>
@@ -38,8 +40,11 @@ const NavigationMenu = ({ loggedUser, setLoggedUser, showMessage }) => {
                 <LinkContainer to={'/'}>
                   <Nav.Link>Home</Nav.Link>
                 </LinkContainer>
-                <LinkContainer to={'/'}>
+                <LinkContainer to={'/products'}>
                   <Nav.Link>Products</Nav.Link>
+                </LinkContainer>
+                <LinkContainer to={'/additem'}>
+                  <Nav.Link>Add item</Nav.Link>
                 </LinkContainer>
                 <LinkContainer to={'/contact'}>
                   <Nav.Link>Contact</Nav.Link>
@@ -60,3 +65,5 @@ const NavigationMenu = ({ loggedUser, setLoggedUser, showMessage }) => {
 };
 
 export default NavigationMenu;
+
+
