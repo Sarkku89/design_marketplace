@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const loginRouter = require('express').Router();
 const User = require('../models/user');
+const { userExtractor } = require('../middleware');
 
 // login as an existing user
 loginRouter.post('/', async (req, res) => {
@@ -25,7 +26,13 @@ loginRouter.post('/', async (req, res) => {
 
   const token = jwt.sign(userForToken, process.env.SECRET);
 
-  res.status(200).send({ token, username: user.username, email: user.email });
+  res.status(200).send({ token, username: user.username, email: user.email, id: user.id });
 });
+
+// Get currently logged in user's info
+loginRouter.post('/me', userExtractor, async (req, res) => {
+  const user = req.user;
+  res.status(200).send(user);
+})
 
 module.exports = loginRouter;

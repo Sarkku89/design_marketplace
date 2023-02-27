@@ -43,3 +43,9 @@
     height: 300px;
     border-radius: 10px;
 }
+
+.productImage {
+    object-fit: cover;
+    width: 290px; 
+    height: 250px;
+}

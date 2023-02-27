@@ -1,18 +1,18 @@
 import { LinkContainer } from 'react-router-bootstrap';
-//import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Container, Navbar, Nav } from 'react-bootstrap';
 import itemService from '../services/item';
 
 
 const NavigationMenu = ({ loggedUser, setLoggedUser, showMessage }) => {
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     window.localStorage.removeItem('loggedMarketplaceUser');
     itemService.setToken(null);
     setLoggedUser(null);
     showMessage('See you again soon!', 'Logged out', 'success');
-    //navigate('/');
+    navigate('/');
   };
 
   return (
@@ -26,13 +26,6 @@ const NavigationMenu = ({ loggedUser, setLoggedUser, showMessage }) => {
               <Nav>
                 <LinkContainer to={'/'}>
                   <Nav.Link>Home</Nav.Link>
-                </LinkContainer>
-                <LinkContainer to={'/'}>
-                  <Nav.Link>Products</Nav.Link>
-                </LinkContainer>
-                
-                <LinkContainer to={'/contact'}>
-                  <Nav.Link>Contact</Nav.Link>
                 </LinkContainer>
               </Nav>
             ) : (

@@ -17,7 +17,6 @@ const getAll = async () => {
 
 // Create new item (== list new item for sale)
 const create = async (itemObject) => {
-  //console.log("Haloo",token);
   const config = {
     headers: { Authorization: token },
   };
@@ -35,6 +34,16 @@ const remove = async (itemObject) => {
   return res.data;
 };
 
-const exportObject = { setToken, getAll, create, remove };
+// Get current user's items
+const getUserItems = async () => {
+  const config = {
+    headers: { Authorization: token },
+  };
+  const res = await axios.get(`http://localhost:3001/api/items/myitems`, config);
+  console.log(res.data);
+  return res.data;
+};
+
+const exportObject = { setToken, getAll, create, remove, getUserItems };
 
 export default exportObject;

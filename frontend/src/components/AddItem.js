@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Button, Form, Stack } from 'react-bootstrap';
 import itemService from '../services/item';
-import FileBase64 from 'react-file-base64';
 
 const AddItem = () => {
     const [name, setName] = useState('');
@@ -9,19 +8,24 @@ const AddItem = () => {
     const [category, setCategory] = useState('');
     const [price, setPrice] = useState('');
     const [imgurl, setImgUrl] = useState('');
+    const seller = JSON.parse(window.localStorage.getItem('loggedMarketplaceUser'));
    
 const onSubmit = async () => {
-    await itemService.create(
-        {
-            name,
-            description,
-            category,
-            price,
-            imgurl,
-            //seller: '63d6c6e2d563cfad7abc9d40'
-        }
-    )
-}  ;
+    try {
+        await itemService.create(
+            {
+                name,
+                description,
+                category,
+                price,
+                imgurl,
+                seller
+            }
+        )
+    } catch (error) {
+        console.log(error.message);
+    }
+};
 
     return (
         <Stack style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '30px' }}>

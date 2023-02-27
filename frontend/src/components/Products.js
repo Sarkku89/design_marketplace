@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button, Form, Stack } from 'react-bootstrap';
 import itemService from '../services/item';
 import Card from 'react-bootstrap/Card';
@@ -6,14 +7,21 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
 
-
 const Products = () => {
-    const [category, setCategory] = useState('0');
+    const [category, setCategory] = useState('All');
     const [items, setItems] = useState([]);
-    const [loading, setLoading] = useState(false); 
+    const [loading, setLoading] = useState(false);
+    const [filteredItems, setFilteredItems] = useState([]);
+    const navigate = useNavigate(); 
 
     const handleClick = () => {
-        setLoading(true) 
+        setLoading(true)
+        if (category !== 'All') {
+          setFilteredItems(items.filter(item => item.category === category))
+        }
+        else {
+          setFilteredItems(items)
+        }
     };
 
     useEffect(() => {
@@ -34,31 +42,31 @@ const Products = () => {
                     <Form.Select
 
                         onChange={({ target }) => setCategory(target.value)}>
-                        <option>Choose a category</option>
+                        <option value="All">Choose a category</option>
                         <option value="Furniture">Furniture</option>
                         <option value="Decoration">Decoration</option>
                         <option value="Carpets">Carpets</option>
                         <option value="OtherTextile">Other textile</option>
                         <option value="Other">Other</option>
                     </Form.Select>
-                    <Button style={{ float: 'center' }} type="button" onClick={handleClick}>Browse</Button>
+                    <Button style={{ float: 'center', margin: '10px' }} type="button" onClick={handleClick}>Browse</Button>
                 </Form.Group>
 
 
 
 
             </Form>
-            <Row xs={1} md={2} className="g-4">
-      {loading ? Array.from({ length: items.length }).map((_, i) => (
-        <Col key={items[i].price}>
+            <Row xs={3} md={4} className="g-4">
+      {loading ? Array.from({ length: filteredItems.length }).map((_, i) => (
+        <Col key={filteredItems[i].id}>
           <Card>
-            <Card.Img variant="top" src="imgs.js/100px160" />
+            <Card.Img variant="top" src={filteredItems[i].imgurl} />
             <Card.Body>
-              <Card.Title>{items[i].name}</Card.Title>
+              <Card.Title>{filteredItems[i].name}</Card.Title>
               <Card.Text>
-                Description: {items[i].description} {'\n'}
-                Price: {items[i].price}
-                {'\n'}
+                Price: {filteredItems[i].price}€
+                <br />
+                <Button style={{ marginTop: '10px'}} onClick={() => navigate('/item', { state: {item: filteredItems[i]} } )}>More</Button>
               </Card.Text>
 
             </Card.Body>

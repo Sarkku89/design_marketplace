@@ -1,7 +1,12 @@
 POST http://localhost:3001/api/items
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkVya2tpRXNpbWVya2tpIiwiZW1haWwiOiJlcmtraS5lc2ltZXJra2lAZ21haWwuY29tIiwiaWQiOiI2M2Q2Yzc2MWQ1NjNjZmFkN2FiYzlkNDQiLCJpYXQiOjE2NzUwNjkzMTZ9.UylPm6Qx6f_g3rnAnsvFLVc4qZPrTjxBcZT8DbpBJQY
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3R1c2VyIiwiZW1haWwiOiJ0ZXN0ZW1haWxAaG90bWFpbC5jb20iLCJpZCI6IjYzZDZjNmUyZDU2M2NmYWQ3YWJjOWQ0MCIsImlhdCI6MTY3NzUxMjQ5M30.BPxqzVACDnh5qc4hCeO2ZZ01eB6iWxnFnNDLCYai9MM
 
 {
-  "name": "testitem2", "description": "testcription2", "category": "testcategory2", "price": 40
+  "name": "Round Chippendale table",
+  "description": "Ornamented. Height 84.5cm. Excellent condition.",
+  "category": "Furniture",
+  "price": 250,
+  "imgurl": "https://sariannajunnila.kuvat.fi/kuvat/backend/8a2f0272-a31c-4237-36de-08d9f8544656-rotated.webp?img=full",
+  "seller": "63d6c6e2d563cfad7abc9d40"
 }

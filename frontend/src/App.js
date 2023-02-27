@@ -9,11 +9,16 @@ import Contact from './components/Contact';
 import Products from './components/Products';
 import Profile from './components/Profile';
 import AddItem from './components/AddItem';
+import SingleItem from './components/SingleItem';
 import { Routes, Route } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import itemService from './services/item';
 import './App.css';
 
 const App = () => {
+  const navigate = useNavigate();
+
   const [loggedUser, setLoggedUser] = useState(null);
 
   const [alertState, setAlertState] = useState({
@@ -22,6 +27,16 @@ const App = () => {
     message: '',
     header: '',
   });
+  
+  useEffect(() => {
+    const isLogged = JSON.parse(window.localStorage.getItem('loggedMarketplaceUser'));
+
+    if (isLogged) {
+      itemService.setToken(isLogged.token);
+      setLoggedUser(isLogged);
+      navigate('/')
+    }
+  }, []);
 
   // You can use showMessage function to show a feedback message to
   // the user. Argument "variant" should get the value 'success' for
@@ -52,6 +67,7 @@ const App = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/item" element={<SingleItem />} />
       </Routes>
     </Container>
   );

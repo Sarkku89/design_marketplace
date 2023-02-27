@@ -13,7 +13,20 @@ itemRouter.get("/", async (req, res) => {
   res.json(items);
 });
 
+// Get items of logged in user
+itemRouter.get('/myitems', userExtractor, async (req, res) => {
+  const user = req.user;
 
+  const items = await Item.find({}).populate('seller', {
+    username: 1,
+    email: 1,
+    id: 1,
+  });
+
+  const myItems = items.filter((item) => item.seller.username === user.username);
+
+  res.json(myItems);
+});
 
 // Add new item on sale
 itemRouter.post("/", userExtractor, async (req, res) => {
@@ -31,7 +44,7 @@ itemRouter.post("/", userExtractor, async (req, res) => {
 
   if (body.name && body.description && body.category && body.price && body.imgurl) {
     const savedItem = await item.save();
-    user.items = user.items.concat(savedItem._id);
+    user.items.concat(savedItem._id);
     await user.save();
 
     res.status(201).json(savedItem.toJSON());
@@ -43,14 +56,9 @@ itemRouter.post("/", userExtractor, async (req, res) => {
 itemRouter.delete("/:id", userExtractor, async (req, res) => {
   const itemToBeDeleted = await Item.findById(req.params.id);
 
-  if (itemToBeDeleted.user.toString() === req.user.id) {
-    await itemToBeDeleted.remove();
+  await itemToBeDeleted.remove();
     res.status(204).end();
-  } else {
-    return res.status(401).json({
-      error: "Logged in user ID does not match the ID of the seller",
-    });
-  }
+
 });
 
 module.exports = itemRouter;

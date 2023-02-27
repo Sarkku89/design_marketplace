@@ -13,5 +13,6 @@ const getAll = async () => {
   return response.data;
 };
 
+
 const exportObject = { create, getAll };
 export default exportObject;
