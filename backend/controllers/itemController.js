@@ -61,4 +61,41 @@ itemRouter.delete("/:id", userExtractor, async (req, res) => {
 
 });
 
+
+itemRouter.put("/:id", userExtractor, async (req, res) => {
+  const body = req.body
+  const user = req.user;
+
+  if (!body) {
+      return res.status(400).json({
+          success: false,
+          error: 'You must provide a body to update',
+      })
+  }
+
+  Item.findOne({ _id: req.params.id }, (err, item) => {
+
+      if (err) {
+          return res.status(404).json({
+              err,
+              message: 'Item not found!',
+          })
+      }
+        item.name = body.name,
+        item.description = body.description,
+        item.category = body.category,
+        item.price = body.price,
+        item.imgurl = body.imgurl,
+        item.seller = user._id,
+     
+          item.save()
+          .catch(error => {
+              return res.status(404).json({
+                  error,
+                  message: 'Item not updated!',
+              })
+          })
+  })
+})
+
 module.exports = itemRouter;

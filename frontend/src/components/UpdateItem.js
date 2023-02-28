@@ -1,42 +1,52 @@
-import React, { useState } from 'react';
-import { Stack, Row, Col, Form, Button } from 'react-bootstrap';
+import React, { useEffect, useState, } from "react";
+import {  useNavigate } from "react-router";
+import { Button, Form, Stack } from 'react-bootstrap';
+import { useLocation } from "react-router";
 import itemService from '../services/item';
 
-const AddItem = () => {
-    const [name, setName] = useState('');
-    const [description, setDescription] = useState('');
-    const [category, setCategory] = useState('');
-    const [price, setPrice] = useState('');
-    const [imgurl, setImgUrl] = useState('');
-    //const seller = JSON.parse(window.localStorage.getItem('loggedMarketplaceUser'));
+ 
+const UpdateItem = () => {
+
+    const location = useLocation();
+    const item = location.state.item;
+    const navigate = useNavigate();
+
+
+
+    const [name, setName] = useState(item.name);
+    const [description, setDescription] = useState(item.description);
+    const [category, setCategory] = useState(item.category);
+    const [price, setPrice] = useState(item.price);
+    const [imgurl, setImgUrl] = useState(item.imgurl);
+
    
-const onSubmit = async () => {
-    try {
-        //console.log(seller)
-        await itemService.create(
-            {
-                name,
-                description,
-                category,
-                price,
-                imgurl,
-                //seller
-            }
-        )
-    } catch (error) {
-        console.log(error.message);
-    }
-};
+    const onSubmit = async () => {
+        try {
+            await itemService.update(
+                {
+                    id: item.id,
+                    name,
+                    description,
+                    category,
+                    price,
+                    imgurl,
+                   
+                }
+            ).then(navigate('/profile'))
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
+ 
 
-    return (
-        <Row style={{padding: '60px'}} xs={1} sm={1} md={1} lg={2}>
-      <Col><Stack style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '30px' }}>
+ // This following section will display the form that takes input from the user to update the data.
+ return (
+    <Stack style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '30px' }}>
 
-            <h3 style={{ fontWeight: 'bold' }}>Add item</h3>
-            <p style={{ fontSize: '17px' }}>Write the details of the item you wish to sell.</p>
+            <h3 style={{ fontWeight: 'bold' }}>Update item</h3>
 
             <Form>
-                <Form.Group className='mb-3' controlId='name' id="choosecat">
+                <Form.Group className='mb-3' controlId='name'>
                     <Form.Control
                         value={name}
                         placeholder='Name'
@@ -81,15 +91,15 @@ const onSubmit = async () => {
                         onChange={({ target }) => setPrice(target.value)}
                         type='text'
                     />
-                </Form.Group><Button style={{ float: 'right' }} type='submit' id="savebtn" onClick={onSubmit}>Save</Button>
+                </Form.Group>
+
+                <Button style={{ float: 'right' }} type='submit' onClick={onSubmit}>Save</Button>
 
             </Form>
 
         </Stack>
-        </Col>
-        <Col><img className="singleimage" alt="table" src="https://www.next.co.uk/nxtcms/resource/blob/5366004/311110dfa9fef7c66ce7d69a25c69d54/dining-data.jpg"></img></Col>
-        </Row>
-    )
+  
+ );
 }
 
-export default AddItem
+export default UpdateItem;

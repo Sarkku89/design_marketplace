@@ -9,6 +9,7 @@ import Contact from './components/Contact';
 import Products from './components/Products';
 import Profile from './components/Profile';
 import AddItem from './components/AddItem';
+import UpdateItem from './components/UpdateItem';
 import SingleItem from './components/SingleItem';
 import { Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
@@ -68,6 +69,7 @@ const App = () => {
         <Route path="/profile" element={<Profile />} />
         <Route path="/products" element={<Products />} />
         <Route path="/item" element={<SingleItem />} />
+        <Route path="/update/:id" element={<UpdateItem />} />
       </Routes>
     </Container>
   );
