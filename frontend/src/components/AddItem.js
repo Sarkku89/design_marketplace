@@ -8,10 +8,11 @@ const AddItem = () => {
     const [category, setCategory] = useState('');
     const [price, setPrice] = useState('');
     const [imgurl, setImgUrl] = useState('');
-    const seller = JSON.parse(window.localStorage.getItem('loggedMarketplaceUser'));
+    //const seller = JSON.parse(window.localStorage.getItem('loggedMarketplaceUser'));
    
 const onSubmit = async () => {
     try {
+        //console.log(seller)
         await itemService.create(
             {
                 name,
@@ -19,7 +20,7 @@ const onSubmit = async () => {
                 category,
                 price,
                 imgurl,
-                seller
+                //seller
             }
         )
     } catch (error) {
