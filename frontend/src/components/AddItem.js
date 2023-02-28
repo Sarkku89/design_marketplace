@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Form, Stack } from 'react-bootstrap';
+import { Stack, Row, Col, Form, Button } from 'react-bootstrap';
 import itemService from '../services/item';
 
 const AddItem = () => {
@@ -28,13 +28,14 @@ const onSubmit = async () => {
 };
 
     return (
-        <Stack style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '30px' }}>
+        <Row style={{padding: '60px'}} xs={1} sm={1} md={1} lg={2}>
+      <Col><Stack style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '30px' }}>
 
             <h3 style={{ fontWeight: 'bold' }}>Add item</h3>
             <p style={{ fontSize: '17px' }}>Write the details of the item you wish to sell.</p>
 
             <Form>
-                <Form.Group className='mb-3' controlId='name'>
+                <Form.Group className='mb-3' controlId='name' id="choosecat">
                     <Form.Control
                         value={name}
                         placeholder='Name'
@@ -79,13 +80,14 @@ const onSubmit = async () => {
                         onChange={({ target }) => setPrice(target.value)}
                         type='text'
                     />
-                </Form.Group>
-
-                <Button style={{ float: 'right' }} type='submit' onClick={onSubmit}>Save</Button>
+                </Form.Group><Button style={{ float: 'right' }} type='submit' id="savebtn" onClick={onSubmit}>Save</Button>
 
             </Form>
 
         </Stack>
+        </Col>
+        <Col><img className="singleimage" alt="table" src="https://www.next.co.uk/nxtcms/resource/blob/5366004/311110dfa9fef7c66ce7d69a25c69d54/dining-data.jpg"></img></Col>
+        </Row>
     )
 }
 

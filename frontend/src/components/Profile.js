@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { Stack, Row, Col, Button } from 'react-bootstrap';
 import itemService from '../services/item';
 
@@ -20,12 +20,31 @@ const Profile = () => {
     itemService.remove(itemToBeRemoved)
   }
 
+  const ColoredLine = ({ color }) => (
+    <hr
+        style={{
+            color: color,
+            backgroundColor: color,
+            height: 5
+        }}
+    />
+);
+
   return (
     <Stack style={{display: 'flex', justifyContent:'center', alignItems:'center', padding: '30px'}}>
       <h3 style={{fontWeight: 'bold'}}>Profile</h3>
-      <p style={{textAlign: 'center'}}>Username:<br />{user.username}</p>
-      <br />
-      <p style={{textAlign: 'center'}}>Email:<br />{user.email}</p>
+      <React.Fragment>
+                    <tr>
+                    <th style={{paddingRight: '15px'}}>Username: </th> 
+                    <td style={{paddingBottom: '5px'}}>{user.username}<br /></td>
+                    </tr>
+                    <tr>
+                      <th style={{paddingRight: '15px'}}>Email: </th>
+                      <td style={{paddingBottom: '5px'}}>{user.email}</td>
+                      </tr><br /> 
+                    </React.Fragment>
+                    
+    
       <h3 style={{fontWeight: 'bold'}}>Items on sale</h3>
       <ul>
           {userItems.length > 0 ?
@@ -35,19 +54,30 @@ const Profile = () => {
                   <Col>
                     <img className="image" alt={item.name} src={item.imgurl}></img></Col>
                   <Col>
-                    <p>
-                      Name: {item.name}
-                      <br/>Description: {item.description}
-                      <br/>Price: {item.price}€
-                    </p>
+                  <React.Fragment>
+                    <tr>
+                    <th style={{paddingRight: '15px'}}>Name: </th> 
+                    <td style={{paddingBottom: '10px'}}>{item.name}<br /></td>
+                    </tr>
+                    <tr>
+                      <th style={{paddingRight: '15px'}}>Description: </th>
+                      <td style={{paddingBottom: '10px'}}>{item.description}</td>
+                      </tr>
+                      <tr>
+                        <th style={{paddingRight: '15px'}}>Price:</th>
+                      <td style={{paddingBottom: '10px'}}>{item.price}€</td>
+                      </tr>
+                    </React.Fragment>
                   </Col>
                   <Col>
                     <Stack style={{ padding: '80px'}}>
                       <Button style={{margin: '10px'}}>Edit</Button>
                       <Button style={{margin: '10px'}} onClick={event => deleteItem(event, item)}>Delete</Button>
+                      
                     </Stack>
                   </Col>
                 </Row>
+                <ColoredLine />
               </div>
             })
           : <p>User has no items on sale</p> }

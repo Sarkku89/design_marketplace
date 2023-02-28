@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Form, Stack } from 'react-bootstrap';
 import itemService from '../services/item';
@@ -13,6 +13,10 @@ const Products = () => {
     const [loading, setLoading] = useState(false);
     const [filteredItems, setFilteredItems] = useState([]);
     const navigate = useNavigate(); 
+
+    const showAll =() =>{
+
+    }
 
     const handleClick = () => {
         setLoading(true)
@@ -39,24 +43,29 @@ const Products = () => {
 
             <Form>
                 <Form.Group className='mb-3' controlId='category'>
+                  <React.Fragment>
+                    <tr>
+                      <td>
                     <Form.Select
 
                         onChange={({ target }) => setCategory(target.value)}>
-                        <option value="All">Choose a category</option>
+                        <option value="">Choose a category</option>
+                        <option value="All">All</option>
                         <option value="Furniture">Furniture</option>
                         <option value="Decoration">Decoration</option>
                         <option value="Carpets">Carpets</option>
                         <option value="OtherTextile">Other textile</option>
                         <option value="Other">Other</option>
                     </Form.Select>
+                    </td>
+                    <td>
                     <Button style={{ float: 'center', margin: '10px' }} type="button" onClick={handleClick}>Browse</Button>
+                    </td>
+                    </tr>
+                    </React.Fragment>
                 </Form.Group>
-
-
-
-
             </Form>
-            <Row xs={3} md={4} className="g-4">
+            <Row xs={1} sm={2} md={3} lg={4} className="g-4">
       {loading ? Array.from({ length: filteredItems.length }).map((_, i) => (
         <Col key={filteredItems[i].id}>
           <Card>
@@ -66,13 +75,26 @@ const Products = () => {
               <Card.Text>
                 Price: {filteredItems[i].price}€
                 <br />
-                <Button style={{ marginTop: '10px'}} onClick={() => navigate('/item', { state: {item: filteredItems[i]} } )}>More</Button>
+                <Button style={{ position: 'absolute', bottom: 8, right: 8}} onClick={() => navigate('/item', { state: {item: filteredItems[i]} } )}>More</Button>
               </Card.Text>
 
             </Card.Body>
           </Card>
         </Col>
-      )) : <p></p>}
+      )) : Array.from({ length: items.length }).map((_, i) => (<Col key={items[i].id}>
+      <Card>
+        <Card.Img variant="top" src={items[i].imgurl} />
+        <Card.Body>
+          <Card.Title>{items[i].name}</Card.Title>
+          <Card.Text>
+            Price: {items[i].price}€
+            <br />
+            <Button style={{ position: 'absolute', bottom: 8, right: 8}} onClick={() => navigate('/item', { state: {item: items[i]} } )}>More</Button>
+          </Card.Text>
+
+        </Card.Body>
+      </Card>
+    </Col>))}
     </Row>
 
         </Stack>

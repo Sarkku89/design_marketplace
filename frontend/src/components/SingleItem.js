@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, Fragment } from 'react'
 import { Stack, Row, Col, Form, Button } from 'react-bootstrap';
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -16,22 +16,40 @@ const SingleItem = (props) => {
   }
 
   return (
-    <Row style={{padding: '60px'}}>
+    <Row style={{padding: '60px'}} xs={1} sm={1} md={1} lg={2}>
       <Col>
-        <img className="image" alt={item.name} src={item.imgurl}></img>
+        <img className="singleimage" alt={item.name} src={item.imgurl}></img>
       </Col>
       <Col>
+      <React.Fragment>
+                    <tr>
+                    <th style={{paddingRight: '15px'}}>Name: </th> 
+                    <td style={{paddingBottom: '10px'}}>{item.name}<br /></td>
+                    </tr>
+                    <tr>
+                      <th style={{paddingRight: '15px'}}>Description: </th>
+                      <td style={{paddingBottom: '10px'}}>{item.description}</td>
+                      </tr>
+                      <tr>
+                        <th style={{paddingRight: '15px'}}>Price:</th>
+                      <td style={{paddingBottom: '10px'}}>{item.price}€</td>
+                      </tr>
+                      <br />
+                      <br />
+                    </React.Fragment>
+                    <p style={{ fontWeight: "bold"}}>About the seller:</p>
+                    <React.Fragment>
+                    <tr>
+                    <th style={{paddingRight: '15px'}}>Username: </th> 
+                    <td style={{paddingBottom: '10px'}}>{item.seller.username}<br /></td>
+                    </tr>
+                    <tr>
+                      <th style={{paddingRight: '15px'}}>Email: </th>
+                      <td style={{paddingBottom: '10px'}}>{item.seller.email}</td>
+                      </tr>
+                    </React.Fragment>
         <Stack>
-          <p style={{ fontWeight: "bold"}}>{item.name}</p>
-          <p>
-          Description: {item.description}
-          <br />Price: {item.price}€</p>
 
-          <div style={{ marginTop: "10px"}}>
-            <p style={{ fontWeight: "bold"}}>About the seller:</p>
-            <p>Username: {item.seller.username}<br />
-            Email: {item.seller.email}</p>
-          </div>
 
           <div style={{ marginTop: "10px"}}>
             <p style={{ fontWeight: "bold"}}>Interested?</p>
