@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Stack, Row, Col, Button } from 'react-bootstrap';
+import { Stack, Row, Col, Button, Nav } from 'react-bootstrap';
 import itemService from '../services/item';
+import { LinkContainer } from 'react-router-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
   const [userItems, setUserItems] = useState([]);
   const [user, setUser] = useState({});
+  const navigate = useNavigate();
   
   useEffect(() => {
     getUser()
@@ -42,9 +45,9 @@ const Profile = () => {
                     </p>
                   </Col>
                   <Col>
-                    <Stack style={{ padding: '80px'}}>
-                      <Button style={{margin: '10px'}}>Edit</Button>
-                      <Button style={{margin: '10px'}} onClick={event => deleteItem(event, item)}>Delete</Button>
+                    <Stack style={{}}>
+                      <Button style={{ marginLeft: '20px'}} onClick={() => navigate(`/update/${item.id}`, { state: {item: item} } )}>Edit</Button>
+                      <Button style={{marginLeft: '20px', marginTop:'10px'}} onClick={event => deleteItem(event, item)}>Delete</Button>
                     </Stack>
                   </Col>
                 </Row>
