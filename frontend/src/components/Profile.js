@@ -53,11 +53,16 @@ const Profile = () => {
           {userItems.length > 0 ?
             userItems.map(item => {
               return <div key={item.id}>
+                <div className='profile'>
                 <Row style={{padding: '20px'}}>
                   <Col>
-                    <img className="image" alt={item.name} src={item.imgurl}></img></Col>
+                  
+                  <div className='d-flex justify-content-evenly'>
+                    <img className="profileimage" alt={item.name} src={item.imgurl}></img></div></Col>
                   <Col>
+                  <div class="mb-auto p-2">
                   <React.Fragment>
+                    
                     <tr>
                     <th style={{paddingRight: '15px'}}>Name: </th> 
                     <td style={{paddingBottom: '10px'}}>{item.name}<br /></td>
@@ -70,21 +75,32 @@ const Profile = () => {
                         <th style={{paddingRight: '15px'}}>Price:</th>
                       <td style={{paddingBottom: '10px'}}>{item.price}€</td>
                       </tr>
+                      
                     </React.Fragment>
+                    </div>
+                    
+                    <React.Fragment>
+                      <tr>
+                      <td><Button style={{marginTop: '30px', marginRight:'10px'}} onClick={() => navigate(`/update/${item.id}`, { state: {item: item} } )}>Edit</Button>
+                      </td>
+                      <td>
+                      <Button style={{marginTop: '30px'}} onClick={event => deleteItem(event, item)}>Delete</Button>
+                      </td>
+                      </tr>
+                      </React.Fragment>
+   
                   </Col>
-                  <Col>
-                    <Stack style={{}}>
-                      <Button style={{ marginLeft: '20px'}} onClick={() => navigate(`/update/${item.id}`, { state: {item: item} } )}>Edit</Button>
-                      <Button style={{marginLeft: '20px', marginTop:'10px'}} onClick={event => deleteItem(event, item)}>Delete</Button>
-                    </Stack>
-                  </Col>
-                </Row>
+                  </Row>    
+                  </div>                  
                 <ColoredLine />
               </div>
+              
             })
           : <p>User has no items on sale</p> }
       </ul>
+      
     </Stack>
+    
   )
 }
 

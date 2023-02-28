@@ -52,6 +52,13 @@
 
 }
 
+.profileimage {
+    object-fit: cover;
+    width: 80%; 
+    border-radius: 10px;
+
+}
+
 .productImage {
     object-fit: cover;
     width: 290px; 
@@ -71,4 +78,7 @@
 .card-title{
     margin-bottom: 15px;
 }
-
+.profile{
+    min-width: fit-content;
+    height: 100%;
+}
