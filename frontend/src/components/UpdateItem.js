@@ -75,7 +75,7 @@ const UpdateItem = () => {
                     <Form.Select
                         onChange={({ target }) => setCategory(target.value)}
                         aria-label="Choose a category">
-                        <option>Category</option>
+                        <option>{category}</option>
                         <option value="Furniture">Furniture</option>
                         <option value="Decoration">Decoration</option>
                         <option value="Carpets">Carpets</option>
