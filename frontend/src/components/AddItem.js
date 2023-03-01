@@ -10,7 +10,8 @@ const AddItem = () => {
     const [imgurl, setImgUrl] = useState('');
     //const seller = JSON.parse(window.localStorage.getItem('loggedMarketplaceUser'));
    
-const onSubmit = async () => {
+const onSubmit = async (e) => {
+    e.preventDefault();
     try {
         //console.log(seller)
         await itemService.create(

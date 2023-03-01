@@ -17,7 +17,7 @@
 #nav a {
     text-decoration: none;
 }
-  
+
 .nav-align {
     text-align: center;
     padding: 3px 0;
@@ -31,7 +31,7 @@
     display: inline-block;
     color: #fff;
 }
-  
+
 .button:hover {
     background-color: #ffb99f;
     color: #ed4a0f;
@@ -39,7 +39,7 @@
 
 .image {
     object-fit: cover;
-    width: 250px; 
+    width: 250px;
     height: 200px;
     border-radius: 10px;
 
@@ -47,21 +47,21 @@
 
 .singleimage {
     object-fit: cover;
-    width: 100%; 
+    width: 100%;
     border-radius: 10px;
 
 }
 
 .profileimage {
     object-fit: cover;
-    width: 80%; 
+    width: 70%;
     border-radius: 10px;
 
 }
 
 .productImage {
     object-fit: cover;
-    width: 290px; 
+    width: 290px;
     height: 250px;
 }
 
@@ -71,14 +71,31 @@
     height: 200px;
 }
 
-.card{
+.card {
     min-width: fit-content;
     height: 100%;
 }
-.card-title{
+
+.card-title {
     margin-bottom: 15px;
 }
-.profile{
+
+.profile {
     min-width: fit-content;
     height: 100%;
+}
+
+.navbar-brand, .nav-link  {
+    padding-left: 2%;
+}
+
+@media (max-width: 990px) {
+    .container {
+        padding: 0;
+    }
+
+    .container,
+    .container-sm {
+        max-width: 100%;
+    }
 }
