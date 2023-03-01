@@ -20,7 +20,7 @@ const UpdateItem = () => {
     const [imgurl, setImgUrl] = useState(item.imgurl);
 
    
-    const onSubmit = async () => {
+    const onSave = async () => {
         try {
             await itemService.update(
                 {
@@ -45,7 +45,7 @@ const UpdateItem = () => {
 
             <h3 style={{ fontWeight: 'bold' }}>Update item</h3>
 
-            <Form>
+            <Form onSubmit={onSave}>
                 <Form.Group className='mb-3' controlId='name'>
                     <Form.Control
                         value={name}
@@ -93,7 +93,7 @@ const UpdateItem = () => {
                     />
                 </Form.Group>
 
-                <Button style={{ float: 'right' }} type='submit' onClick={onSubmit}>Save</Button>
+                <Button style={{ float: 'right' }} type='submit'>Save</Button>
 
             </Form>
 

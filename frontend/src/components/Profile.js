@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { Stack, Row, Col, Button, Nav } from 'react-bootstrap';
+import { Stack, Row, Col, Button, Table, Nav } from 'react-bootstrap';
 import itemService from '../services/item';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useNavigate } from 'react-router-dom';
@@ -19,8 +19,10 @@ const Profile = () => {
     setUser(JSON.parse(window.localStorage.getItem('loggedMarketplaceUser')));
   };
 
-  const deleteItem = (event, itemToBeRemoved) => {
-    itemService.remove(itemToBeRemoved)
+  const deleteItem = async (event, itemToBeRemoved) => {
+    await itemService.remove(itemToBeRemoved)
+    const items = await itemService.getUserItems()
+    setUserItems(items);
   }
 
   const ColoredLine = ({ color }) => (
@@ -57,12 +59,12 @@ const Profile = () => {
                 <Row style={{padding: '20px'}}>
                   <Col>
                   
-                  <div className='d-flex justify-content-evenly'>
-                    <img className="profileimage" alt={item.name} src={item.imgurl}></img></div></Col>
+                  
+                    <img className="profileimage" alt={item.name} src={item.imgurl}></img></Col>
                   <Col>
-                  <div class="mb-auto p-2">
-                  <React.Fragment>
-                    
+                  <table>
+                  <tbody>
+                   
                     <tr>
                     <th style={{paddingRight: '15px'}}>Name: </th> 
                     <td style={{paddingBottom: '10px'}}>{item.name}<br /></td>
@@ -76,10 +78,11 @@ const Profile = () => {
                       <td style={{paddingBottom: '10px'}}>{item.price}€</td>
                       </tr>
                       
-                    </React.Fragment>
-                    </div>
+                    </tbody>
+                    </table>
                     
-                    <React.Fragment>
+                    <table>
+                  <tbody>
                       <tr>
                       <td><Button style={{marginTop: '30px', marginRight:'10px'}} onClick={() => navigate(`/update/${item.id}`, { state: {item: item} } )}>Edit</Button>
                       </td>
@@ -87,7 +90,9 @@ const Profile = () => {
                       <Button style={{marginTop: '30px'}} onClick={event => deleteItem(event, item)}>Delete</Button>
                       </td>
                       </tr>
-                      </React.Fragment>
+                       
+                    </tbody>
+                    </table>
    
                   </Col>
                   </Row>    
