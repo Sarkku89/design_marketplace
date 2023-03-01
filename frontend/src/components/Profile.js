@@ -1,10 +1,9 @@
-import React, { useState, useEffect, Fragment } from 'react';
-import { Stack, Row, Col, Button, Table, Nav } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Stack, Row, Col, Button } from 'react-bootstrap';
 import itemService from '../services/item';
-import { LinkContainer } from 'react-router-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
-const Profile = () => {
+const Profile = (loggedUser) => {
   const [userItems, setUserItems] = useState([]);
   const [user, setUser] = useState({});
   const navigate = useNavigate();
@@ -16,7 +15,7 @@ const Profile = () => {
   const getUser = async () => {
     const items = await itemService.getUserItems()
     setUserItems(items)
-    setUser(JSON.parse(window.localStorage.getItem('loggedMarketplaceUser')));
+    setUser(loggedUser.loggedUser);
   };
 
   const deleteItem = async (event, itemToBeRemoved) => {
