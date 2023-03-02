@@ -46,17 +46,33 @@ const getUserItems = async () => {
 
 // update an item from sale
 const update = async (itemObject) => {
-  console.log(itemObject)
-  console.log('itemservices')
+  console.log(itemObject);
+  console.log('itemservices');
   const config = {
     headers: { Authorization: token },
   };
   const res = await axios.put(`${baseUrl}/${itemObject.id}`, itemObject, config);
   return res.data;
-
 };
 
+// add a message to an item
+const addMessage = async (id, text) => {
+  const config = {
+    headers: { Authorization: token },
+  };
+  console.log('TEXT:', text);
+  const res = await axios.put(`${baseUrl}/message/${id}`, { text }, config);
+  return res.data;
+};
 
-const exportObject = { setToken, getAll, create, remove, getUserItems, update};
+const exportObject = {
+  setToken,
+  getAll,
+  create,
+  remove,
+  getUserItems,
+  update,
+  addMessage,
+};
 
 export default exportObject;

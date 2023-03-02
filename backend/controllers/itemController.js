@@ -1,11 +1,11 @@
-const itemRouter = require("express").Router();
-const { response } = require("express");
-const Item = require("../models/item");
-const { userExtractor } = require("../middleware");
+const itemRouter = require('express').Router();
+const { response } = require('express');
+const Item = require('../models/item');
+const { userExtractor } = require('../middleware');
 
 // Get all items on sale
-itemRouter.get("/", async (req, res) => {
-  const items = await Item.find({}).populate("seller", {
+itemRouter.get('/', async (req, res) => {
+  const items = await Item.find({}).populate('seller', {
     username: 1,
     email: 1,
     id: 1,
@@ -29,7 +29,7 @@ itemRouter.get('/myitems', userExtractor, async (req, res) => {
 });
 
 // Add new item on sale
-itemRouter.post("/", userExtractor, async (req, res) => {
+itemRouter.post('/', userExtractor, async (req, res) => {
   const body = req.body;
   const user = req.user;
 
@@ -53,49 +53,60 @@ itemRouter.post("/", userExtractor, async (req, res) => {
   }
 });
 
-itemRouter.delete("/:id", userExtractor, async (req, res) => {
+itemRouter.delete('/:id', userExtractor, async (req, res) => {
   const itemToBeDeleted = await Item.findById(req.params.id);
 
   await itemToBeDeleted.remove();
-    res.status(204).end();
-
+  res.status(204).end();
 });
 
-
-itemRouter.put("/:id", userExtractor, async (req, res) => {
-  const body = req.body
+itemRouter.put('/:id', userExtractor, async (req, res) => {
+  const body = req.body;
   const user = req.user;
 
   if (!body) {
-      return res.status(400).json({
-          success: false,
-          error: 'You must provide a body to update',
-      })
+    return res.status(400).json({
+      success: false,
+      error: 'You must provide a body to update',
+    });
   }
 
   Item.findOne({ _id: req.params.id }, (err, item) => {
+    if (err) {
+      return res.status(404).json({
+        err,
+        message: 'Item not found!',
+      });
+    }
+    (item.name = body.name),
+      (item.description = body.description),
+      (item.category = body.category),
+      (item.price = body.price),
+      (item.imgurl = body.imgurl),
+      (item.seller = user._id),
+      item.save().catch((error) => {
+        return res.status(404).json({
+          error,
+          message: 'Item not updated!',
+        });
+      });
+  });
+});
 
-      if (err) {
-          return res.status(404).json({
-              err,
-              message: 'Item not found!',
-          })
-      }
-        item.name = body.name,
-        item.description = body.description,
-        item.category = body.category,
-        item.price = body.price,
-        item.imgurl = body.imgurl,
-        item.seller = user._id,
-     
-          item.save()
-          .catch(error => {
-              return res.status(404).json({
-                  error,
-                  message: 'Item not updated!',
-              })
-          })
-  })
-})
+//adds a message to the item
+itemRouter.put('/message/:id', userExtractor, async (req, res) => {
+  const messagedItem = await Item.findById(req.params.id);
+  console.log('TESTI:', req.body.text, req.user.email);
+
+  if (req.body.text && req.user.email) {
+    console.log('ITEM:', messagedItem.name);
+    messagedItem.messages.push({ senderEmail: req.user.email, text: req.body.text });
+    await Item.findByIdAndUpdate(messagedItem.id, messagedItem, { new: true });
+
+    res.status(201).json(messagedItem.toJSON());
+  } else {
+    res.status(400).end();
+  }
+});
 
 module.exports = itemRouter;

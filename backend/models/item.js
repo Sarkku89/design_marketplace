@@ -28,6 +28,12 @@ const itemSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
   },
+  messages: [
+    {
+      senderEmail: { type: String, required: true },
+      text: { type: String, required: true },
+    },
+  ],
 });
 
 itemSchema.set('toJSON', {
