@@ -28,14 +28,14 @@ const App = () => {
     message: '',
     header: '',
   });
-  
+
   useEffect(() => {
     const isLogged = JSON.parse(window.localStorage.getItem('loggedMarketplaceUser'));
 
     if (isLogged) {
       itemService.setToken(isLogged.token);
       setLoggedUser(isLogged);
-      navigate('/')
+      navigate('/');
     }
   }, []);
 
@@ -59,14 +59,20 @@ const App = () => {
       {alertState.show ? <AlertMessage alertState={alertState} /> : null}
       <Routes>
         <Route path="/register" element={<Register showMessage={showMessage} />} />
+        <Route path="/login" element={<Login />} />
         <Route
-          path="/login"
-          element={<Login />}
+          path="/"
+          element={
+            <Home
+              loggedUser={loggedUser}
+              showMessage={showMessage}
+              setLoggedUser={setLoggedUser}
+            />
+          }
         />
-        <Route path="/" element={<Home loggedUser={loggedUser} showMessage={showMessage} setLoggedUser={setLoggedUser}/>} />
-        <Route path="/additem" element={<AddItem />} />
+        <Route path="/additem" element={<AddItem showMessage={showMessage} />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/profile" element={<Profile loggedUser={loggedUser}/>} />
+        <Route path="/profile" element={<Profile loggedUser={loggedUser} />} />
         <Route path="/products" element={<Products />} />
         <Route path="/item" element={<SingleItem />} />
         <Route path="/update/:id" element={<UpdateItem />} />
